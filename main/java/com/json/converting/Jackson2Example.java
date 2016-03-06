@@ -18,18 +18,22 @@ public class Jackson2Example {
 		ObjectMapper mapper = new ObjectMapper();
 
 		CurrentUsingApp currentApp = createDummyObject();
-
+		CurrentUsingApp currentApp2 = createDummyObject();
+		currentApp2.setName("sasa");
+		currentApp2.setTime("22:2222");
 		try {
 			// Convert object to JSON string and save into a file directly
-			mapper.writeValue(new File("/home/mrs/staff.json"), currentApp);
-
+			File file = new File("/home/mrs/staff.json");
+			mapper.writeValue(file, currentApp);
+			mapper.writeValue(file, currentApp2);
 			// Convert object to JSON string
 			String jsonInString = mapper.writeValueAsString(currentApp);
-			System.out.println(jsonInString);
+			String jsonInString2 = mapper.writeValueAsString(currentApp2);
+			System.out.println(jsonInString2);
 
 			// Convert object to JSON string and pretty print
 			jsonInString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(currentApp);
-
+			jsonInString2 = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(currentApp2);
 			System.out.println(jsonInString);
 
 		} catch (JsonGenerationException e) {
